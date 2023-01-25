@@ -40,8 +40,7 @@ export const App = () => {
   }
   
   const countTotal = countTotalFeedback();
-
-  console.log(1);
+  
   return (
     <Section title="Please leave feedback">
       <FeedbackOptions 
