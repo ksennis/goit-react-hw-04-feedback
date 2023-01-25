@@ -1,6 +1,5 @@
 import propTypes from 'prop-types';
 
-
 export const Section = ({children, title}) => {
     return (
         <div>
