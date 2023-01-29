@@ -12,23 +12,22 @@ const feedbackName = [
 ]
 
 export const App = () => {
-  const [feedback, setFeedback] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0
-  });
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   const handleClick = evt => {
     const {name} = evt.target;
     
-    setFeedback(prevState => ({ 
-      ...prevState,
-      [name]: prevState[name] + 1
-    }));
+    switch(name) {
+      case 'good': { setGood(good + 1); break; }
+      case 'neutral': { setNeutral(neutral + 1); break; }
+      case 'bad': { setBad(bad + 1); break; }
+    }
   };
 
   const countTotalFeedback = () => {
-    return feedback.good + feedback.neutral + feedback.bad;
+    return good + neutral + bad;
   };
 
   const countPositiveFeedbackPercentage = () => {
@@ -36,7 +35,7 @@ export const App = () => {
         return 0;
     }
     
-    return Number((feedback.good / countTotalFeedback() * 100).toFixed(0));
+    return Number((good / countTotalFeedback() * 100).toFixed(0));
   }
   
   const countTotal = countTotalFeedback();
@@ -50,9 +49,9 @@ export const App = () => {
       {countTotal === 0 && <Notification message="There is no feedback"></Notification>}
       {countTotal > 0 && 
         <Statistics 
-          good={feedback.good} 
-          neutral={feedback.neutral} 
-          bad={feedback.bad}  
+          good={good} 
+          neutral={neutral} 
+          bad={bad}  
           total={countTotalFeedback()}
           positivePercentage={countPositiveFeedbackPercentage()} 
         />
